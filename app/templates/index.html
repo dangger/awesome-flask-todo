@@ -1,1 +1,33 @@
-{{ text }}
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TODO list with flask</title>
+</head>
+<body>
+<table class="table">
+    <thead>
+    <tr>
+        <td>Content</td>
+        <td>Time</td>
+        <td>Status</td>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for t in todos %}
+
+    <tr>
+        <td>{{ t.content }}</td>
+        <td>{{ t.time }}</td>
+        <td>{{ t.status }}</td>
+    </tr>
+
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
