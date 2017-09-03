@@ -5,9 +5,29 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/bootstrap.css">
     <title>TODO list with flask</title>
 </head>
 <body>
+
+
+<form class="input-group" action="/add" method="post">
+	{{ form.hidden_tag() }}
+	{{ form.content(class="form-control") }}
+	<span class="input-group-btn">
+		<button class="btn btn-primary" type="submit">Add</button>
+	</span>
+</form>
+{% for error in form.errors.content %}
+	<div class="flash alert-danger"><span>{{ error }}</span></div>
+{% endfor %}
+
+<hr>
+
+
+<div>
+<h2>Todo List</h2>
+{% if todos %}
 <table class="table">
     <thead>
     <tr>
@@ -23,11 +43,13 @@
     <tr>
         <td>{{ t.content }}</td>
         <td>{{ t.time }}</td>
-        <td>{% if t.status == 0 %}
+        <td>
+            {% if t.status == 0 %}
             <a href="/done/{{ t.id }}" class="btn btn-primary">Done</a>
             {% else %}
              <a href="/undone/{{ t.id }}" class="btn btn-primary">Undone</a>
             {% endif %}
+            <a href="/delete/{{ t.id }}" class="btn btn-danger">Delete</a>
         </td>
     </tr>
 
@@ -36,11 +58,10 @@
 </table>
 
 
-<form action="/add" method="post" class="input-group">
-    <input type="text" id="content" name="content" class="form-control" value="">
-    <span class="input-group-btn">
-        <button class="btn btn-primary" type="submit">Add</button>
-    </span>
-</form>
+{% else %}
+<h3 class="text-info">no todos,please add</h3>
+
+{% endif %}
+</div>
 </body>
 </html>
